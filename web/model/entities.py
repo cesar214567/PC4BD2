@@ -3,7 +3,8 @@ import datetime
 from sqlalchemy.orm import relationship
 from database import connector
 
-class Tweet(connector.Manager.Base):
-    __tablename__='tweet'
+class image(connector.Manager.Base):
+    __tablename__='image'
     id = Column(String(22),primary_key=True)
-    text =Column(String(300))
+    nombre = Column(String(30))
+        
