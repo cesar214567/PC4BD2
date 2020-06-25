@@ -22,7 +22,7 @@ function clearInner(node) {
     node.parentNode.removeChild(node);
 }
 
-function uploadFile(){
+function sendfile(){
     var fd = new FormData();
     var files = $('#file')[0].files[0];
     fd.append('file',files);    
@@ -34,8 +34,9 @@ function uploadFile(){
         processData: false,
         success: function(response){
             if(response != 0){
-                $('#img').attr('src',response);
-                $('.preview  img').show();
+                //$('#img').attr('src',response);
+                //$('.preview  img').show();
+                alert(response);
             }   
             else{
                 alert('File not uploaded');
