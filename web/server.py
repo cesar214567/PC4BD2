@@ -1,16 +1,9 @@
 from flask import Flask,render_template, request, session, Response, redirect
-from database import connector
-from model import entities
 import json
 import time
 import os,sys
 from datetime import datetime
 from werkzeug.utils import secure_filename
-
-
-created_block = 0
-db = connector.Manager()
-engine = db.createEngine()
 
 app = Flask(__name__)
 
@@ -31,15 +24,29 @@ def allowed_file(filename):
     return '.' in filename and \
            filename.rsplit('.', 1)[1] in ALLOWED_EXTENSIONS
 
-@app.route("/upload", methods=['GET', 'POST'])
-def nani():
-    if request.method == 'POST':
-        file = request.files['file']
-        if file and allowed_file(file.filename):
-            filename = secure_filename(file.filename)
-            file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-            return "Success"
-    return "NICE "
+@app.route("/KNN", methods=['POST'])
+def KNN():
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))   
+        data=[]
+        #codigo de ariana
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))      
+        return data
+    return "FAILED"
+
+@app.route("/RTREE", methods=['POST'])
+def RTREE():
+    file = request.files['file']
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        data=[]
+        #codigo de ariana
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))      
+        return data
+    return "FAILED"
 
 
 @app.route('/queries')

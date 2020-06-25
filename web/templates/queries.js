@@ -22,25 +22,29 @@ function clearInner(node) {
     node.parentNode.removeChild(node);
 }
 
-function sendfile(){
+function sendfile(url1){
     var fd = new FormData();
     var files = $('#file')[0].files[0];
     fd.append('file',files);    
     $.ajax({
-        url: 'upload',
+        url: url1,
         type: 'POST',
         data: fd,
         contentType: false,
         processData: false,
         success: function(response){
-            if(response != 0){
-                //$('#img').attr('src',response);
-                //$('.preview  img').show();
-                alert(response);
-            }   
-            else{
-                alert('File not uploaded');
-            }        
+            var i=0; 
+            response.forEach(element => {
+              var linea="<tr><td>ID</td><td><img src=\"static/TEMPLATE\" width=\"300\" height=\"200\">";
+              linea+="</td><td>NAME</td></tr>";
+              linea.replace("ID",response[i].id);
+              linea.replace("TEMPLATE",response[i].name);
+              linea.replace("NAME",response[i].name);
+              i++;
+              $("#"+url1).append(linea );
+              
+                
+            });
         }
     });
 }
