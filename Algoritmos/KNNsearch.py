@@ -16,7 +16,7 @@ def KNNsearch(query, k, metric):
             heapq.heappush(result,(-dist,Collection["names"][i]))
         elif(heapq.nsmallest(1,result)[0][0]<-dist):
             heapq.heapreplace(result,(-dist,Collection["names"][i]))
-    return result
+    return [heapq.heappop(result) for i in range(len(result))]
 
 
 path_name = "Abdullah_Gul_0008.jpg"
