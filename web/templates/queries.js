@@ -21,30 +21,48 @@ function clearInner(node) {
     }
     node.parentNode.removeChild(node);
 }
+function cargar(){
+  $('.dropdown-trigger').dropdown();
+
+}
+
+function Nombre1(xD){
+  document.getElementById("dropdownn1").innerText=xD.toLowerCase();
+  document.getElementById("dropdownn1").innerHTML=xD.toLowerCase();
+}
+
 
 function sendfile(url1){
+  var elem = document.getElementById('KNN');
+  clearInner(elem);
     var fd = new FormData();
     var files = $('#file')[0].files[0];
-    fd.append('file',files);    
+    fd.append('file',files);   
+    var a =document.getElementById("dropdownn1").innerHTML;
+    var b = $('#K').val();
+    console.log(b)
+    document.getElementById("K").value='';
     $.ajax({
-        url: url1,
+        url: url1+"/"+a+"/"+b,
         type: 'POST',
         data: fd,
         contentType: false,
         processData: false,
         success: function(response){
-            var i=0; 
-            response.forEach(element => {
-              var linea="<tr><td>ID</td><td><img src=\"static/TEMPLATE\" width=\"300\" height=\"200\">";
-              linea+="</td><td>NAME</td></tr>";
-              linea.replace("ID",response[i].id);
-              linea.replace("TEMPLATE",response[i].name);
-              linea.replace("NAME",response[i].name);
+            console.log(response[0]);
+            i=0;
+            $.each(response, function(){  
+              var linea='<tr><td><img src=\'static/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre+'</td></tr>';
+              $("#KNN").append(linea );
               i++;
-              $("#"+url1).append(linea );
+            });
               
                 
-            });
+        },
+        error: function(response){
+          console.log("WTF");
         }
     });
 }
+
+

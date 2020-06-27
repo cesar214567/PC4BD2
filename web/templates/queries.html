@@ -17,7 +17,7 @@
 
     </style>
 </head>
-<body onload="Parallax()">
+<body onload="Parallax(),cargar()">
     <nav class="light-blue lighten-1" role="navigation">
         <div class="nav-wrapper container"><a id="logo-container" href="/" class="brand-logo">EPIC SEARCH</a>
             <ul class="right hide-on-med-and-down">
@@ -42,7 +42,28 @@
                         <form class="col s8 ">
                             <div class="row">
                                 <div class="col s3"></div>
-                                <div class="col s6 serif"><h4>KNN SEARCH</h2></div>
+                                <div class="col s6 serif"><h4>KNN SEARCH</h4></div>
+                            </div>
+                            <div class="row">
+                                <div class="col s1"></div>
+                                <div class="col s4">
+                                    <a class='dropdown-trigger btn' href='#' data-target='dropdown1' id="dropdownn1">Metodo</a>
+                                    <ul id='dropdown1' class='dropdown-content'>
+                                        <li>
+                                            <a href="#" onclick="Nombre1('eucledian')">Eucledian</a>
+                                        </li>
+                                        <li class="divider" tabindex="-1"></li>
+                                        <li>
+                                            <a href="#" onclick="Nombre1('manhattan')">Manhattan</a>
+                                        </li>
+                                        <li class="divider" tabindex="-1"></li>
+                                    </ul>
+                                </div>
+                                <div class="col s2 "></div>
+                                <div class="col s4 white">
+                                    <input placeholder="Inserte numero K " id="K" type="text" class="validate">
+                                </div>
+                                    
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 white">
@@ -51,13 +72,14 @@
                                 <div class="col s5"></div>
                                 <a class="waves-effect waves-light btn-large" onclick="sendfile('KNN')">Buscar</a> 
                             </div>
+                            
+                            
                         </form>
                     </div>   
                     <br> 
                         <table class="striped centered responsive-table">
                             <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>IMAGE</th>
                                 <th>NAME</th>
                             </tr>
