@@ -6,6 +6,7 @@ from datetime import datetime
 from werkzeug.utils import secure_filename
 from Algoritmos.extractFeatures import getFeatures
 from Algoritmos.KNNsearch import KNNsearch
+import Algoritmos.Init_Rtree
 app = Flask(__name__)
 
 @app.route('/')
@@ -45,13 +46,25 @@ def KNN(method,K):
         return Response(json.dumps(response),mimetype="application/json")
     return "FAILED"
 
-@app.route("/RTREE", methods=['POST'])
+@app.route("/RTREE/<K>", methods=['POST'])
 def RTREE():
+    global rtree
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        
+        ###RTREE
+        data=getFeatures("imagenes/"+filename)
+        print(data)
+        p = index.Property()
+        p.dimension = 128
+        p.buffering_capacity = 3
+        p.dat_extension = 'data'
+        p.idx_extension = 'index'
+        idx = index.Index('128d_index',properties=p)
+
+
+
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))      
         return data
     return "FAILED"
