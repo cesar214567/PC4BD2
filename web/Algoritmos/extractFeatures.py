@@ -49,5 +49,6 @@ def extract():
 def initCollection():
 	global Collection
 	Collection = pickle.loads(open(DestPath, "rb").read())
+	Collection['names'] = Collection['names']
 
 initCollection()
