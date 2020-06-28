@@ -1,13 +1,18 @@
+
 from flask import Flask,render_template, request, session, Response, redirect
 import json
 import time
 import os,sys
+os.popen('rm 128d_index.data 128d_index.index')
+
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from Algoritmos.extractFeatures import getFeatures
 from Algoritmos.KNNsearch import KNNsearch
+from Algoritmos.Init_Rtree import rtree
 import Algoritmos.Init_Rtree
 app = Flask(__name__)
+
 
 @app.route('/')
 def index():
@@ -17,7 +22,7 @@ def index():
 def static_content(content):
     return render_template(content)
 
-UPLOAD_FOLDER = '/home/cesar21456/Desktop/git/PC4BD2/web/imagenes' 
+UPLOAD_FOLDER = '/home/enrique/Documentos/BD2/PC4BD2/web/imagenes' 
 ALLOWED_EXTENSIONS = set(['txt','png','jpg','jpeg'])
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -47,26 +52,22 @@ def KNN(method,K):
     return "FAILED"
 
 @app.route("/RTREE/<K>", methods=['POST'])
-def RTREE():
+def RTREE(K):
     global rtree
     file = request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        ###RTREE
         data=getFeatures("imagenes/"+filename)
-        print(data)
-        p = index.Property()
-        p.dimension = 128
-        p.buffering_capacity = 3
-        p.dat_extension = 'data'
-        p.idx_extension = 'index'
-        idx = index.Index('128d_index',properties=p)
+        list_carac = []
+        for i in data: 
+            list_carac.append(i)
+            list_carac.append(i)
 
-
-
-        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))      
-        return data
+        lres = list(rtree.nearest(coordinates=tuple(list_carac), num_results=int(K), objects = "raw"))
+        os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))    
+        print(lres)   
+        return Response(json.dumps(lres),mimetype="application/json")
     return "FAILED"
 
 

@@ -67,14 +67,14 @@ function sendfile(url1){
 
 
 function sendfile2(url1){
-  var elem = document.getElementById('RTREE');
+  var elem = document.getElementById('RTREE');    
   clearInner(elem);
     var fd = new FormData();
-    var files = $('#file')[0].files[0];
+    var files = $('#file1')[0].files[0];
     fd.append('file',files);   
     var b = $('#K2').val();
     console.log(b)
-    document.getElementById("K").value='';
+    document.getElementById("K2").value='';
     $.ajax({
         url: url1+"/"+b,
         type: 'POST',
@@ -82,15 +82,13 @@ function sendfile2(url1){
         contentType: false,
         processData: false,
         success: function(response){
-            console.log(response[0]);
+            console.log(response);
             i=0;
             $.each(response, function(){  
               var linea='<tr><td><img src=\'static/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre+'</td></tr>';
-              $("#KNN").append(linea );
+              $("#RTREE").append(linea );
               i++;
-            });
-              
-                
+            });  
         },
         error: function(response){
           console.log("WTF");
