@@ -53,7 +53,7 @@ function sendfile(url1){
             console.log(response[0]);
             i=0;
             $.each(response, function(){  
-              var linea='<tr><td><img src=\'static/'+response[i].nombre.slice(0,tamano-9)+'/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre.slice(0,tamano-9)+'</td></tr>';
+              var linea='<tr><td><img src=\'static/dataset/'+response[i].nombre.slice(0,tamano-9)+'/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre.slice(0,tamano-9)+'</td></tr>';
               $("#KNN").append(linea );
               i++;
             });
