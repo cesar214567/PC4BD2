@@ -3,6 +3,7 @@ from Algoritmos.extractFeatures import Collection, initCollection, getFeatures
 import heapq, math, os
 from scipy.spatial import distance
 
+print(Collection)
 def KNNsearch(query, k, metric):
     result = []
     for i in range(len(Collection["names"])):

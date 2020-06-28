@@ -39,7 +39,7 @@ def KNN(method,K):
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))   
         #codigo de ariana
         data=getFeatures("imagenes/"+filename)
-        print(data)
+        #print(data)
         ans = KNNsearch(data,int(K),method)
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))   
         response=[] 
@@ -66,7 +66,7 @@ def RTREE(K):
 
         lres = list(rtree.nearest(coordinates=tuple(list_carac), num_results=int(K), objects = "raw"))
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))    
-        print(lres)   
+        #print(lres)   
         return Response(json.dumps(lres),mimetype="application/json")
     return "FAILED"
 

@@ -49,10 +49,11 @@ function sendfile(url1){
         contentType: false,
         processData: false,
         success: function(response){
+          var tamano = response[i].nombre.length
             console.log(response[0]);
             i=0;
             $.each(response, function(){  
-              var linea='<tr><td><img src=\'static/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre+'</td></tr>';
+              var linea='<tr><td><img src=\'static/'+response[i].nombre.slice(0,tamano-9)+'/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre.slice(0,tamano-9)+'</td></tr>';
               $("#KNN").append(linea );
               i++;
             });
@@ -76,16 +77,18 @@ function sendfile2(url1){
     console.log(b)
     document.getElementById("K2").value='';
     $.ajax({
+      
         url: url1+"/"+b,
         type: 'POST',
         data: fd,
         contentType: false,
         processData: false,
         success: function(response){
+            var tamano = response[i].nombre.length
             console.log(response);
             i=0;
             $.each(response, function(){  
-              var linea='<tr><td><img src=\'static/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre+'</td></tr>';
+              var linea='<tr><td><img src=\'static/'+response[i].nombre.slice(0,tamano-9)+'/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre+'</td></tr>';
               $("#RTREE").append(linea );
               i++;
             });  
