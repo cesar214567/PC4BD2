@@ -84,9 +84,9 @@ function sendfile2(url1){
         contentType: false,
         processData: false,
         success: function(response){
-            var tamano = response[i].nombre.length
             console.log(response);
             i=0;
+            var tamano = response[i].nombre.length;
             $.each(response, function(){  
               var linea='<tr><td><img src=\'static/dataset/'+response[i].nombre.slice(0,tamano-9)+'/'+response[i].nombre+'\' width=\"300\" height=\"200\"></td><td>'+response[i].nombre+'</td></tr>';
               $("#RTREE").append(linea );
