@@ -7,7 +7,6 @@ p.dat_extension = 'data'
 p.idx_extension = 'index'
 rtree = index.Index('128d_index',properties=p,interleaved = False)
 
-print('inicio')
 for i in range(len(Collection["names"])):    
     tupla=[]
     for j in Collection["encodings"][i]:

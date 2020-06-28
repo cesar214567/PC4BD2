@@ -63,7 +63,6 @@ def RTREE(K):
         for i in data: 
             list_carac.append(i)
             list_carac.append(i)
-
         lres = list(rtree.nearest(coordinates=tuple(list_carac), num_results=int(K), objects = "raw"))
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))    
         #print(lres)   
