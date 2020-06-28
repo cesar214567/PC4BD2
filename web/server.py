@@ -33,6 +33,7 @@ def allowed_file(filename):
 
 @app.route("/KNN/<method>/<K>", methods=['POST'])
 def KNN(method,K):
+    start=datetime.now()
     file= request.files['file']
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
@@ -48,11 +49,14 @@ def KNN(method,K):
             dictionary['peso']=i[0]
             dictionary['nombre']=i[1] 
             response.append(dictionary)
+        time =(datetime.now()-start)
+        print(time)
         return Response(json.dumps(response),mimetype="application/json")
     return "FAILED"
 
 @app.route("/RTREE/<K>", methods=['POST'])
 def RTREE(K):
+    start=datetime.now()
     global rtree
     file = request.files['file']
     if file and allowed_file(file.filename):
@@ -66,6 +70,8 @@ def RTREE(K):
         lres = list(rtree.nearest(coordinates=tuple(list_carac), num_results=int(K), objects = "raw"))
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))    
         #print(lres)   
+        time =(datetime.now()-start)
+        print(time)
         return Response(json.dumps(lres),mimetype="application/json")
     return "FAILED"
 
