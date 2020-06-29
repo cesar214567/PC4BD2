@@ -45,7 +45,7 @@ Como se puede observar en los resultados,  se obtuvo un tiempo muy parecido en a
  **KNN-Secuencial métrica: Manhattan**
 
 |  **N** | **KNN-RTree** | **KNN-Secuencial** |
-| :---: | :---: | :---: | :---: |
+| :---: | :---: | :---: | 
 |  100 | 0.860ms | 1.489ms |
 |  200 | 1.041ms | 2.507ms |
 |  400 | 1.433ms | 5.041ms |
@@ -64,8 +64,9 @@ En este experimento, observamos que el tiempo del KNN-R-Tree es sustancialmente 
 
 En base a la referencia dada en el enunciado del proyecto construimos dos funciones:
 
-getFeatures() para extraer el vector característico de 128 dimensiones con el modelo cnn de la librería face_recognition y la lectura de la imagen se realizó con la librería cv2(computer vision). 
-extract() para extraer los vectores característicos de las imágenes de n directorio específico y almacenarlos en un archivo (pickle) como un diccionario de nombres y vectores.
+- getFeatures() para extraer el vector característico de 128 dimensiones con el modelo cnn de la librería face_recognition y la lectura de la imagen se realizó con la librería cv2(computer vision). 
+- extract() para extraer los vectores característicos de las imágenes de n directorio específico y almacenarlos en un archivo (pickle) como un diccionario de nombres y vectores.
+
 El módulo pickle implementa protocolos binarios para serializar y deserializar una estructura de objeto Python.
 
 ### KNN - Search
@@ -85,7 +86,7 @@ p.dat_extension = 'data'
 p.idx_extension = 'index'
 rtree = index.Index('128d_index',properties=p,interleaved = False)  #interleaved se setea a falso para mayor comodidad a la hora de insertar tuplas
 
--Inserción
+- Inserción
 
 rtree.insert(id = i,coordinates = Tupla, obj = {“nombre”:nombre}) #Tupla contiene elementos del tipo (a1,a1,a2,a2… a128,a128) 
 
