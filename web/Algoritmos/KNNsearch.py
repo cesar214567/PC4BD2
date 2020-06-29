@@ -3,7 +3,7 @@ from Algoritmos.extractFeatures import Collection, initCollection, getFeatures
 import heapq, math, os
 from scipy.spatial import distance
 
-print(Collection)
+#KNN busqueda secuencial euclídeana o manhattan
 def KNNsearch(query, k, metric):
     result = []
     for i in range(len(Collection["names"])):
@@ -19,15 +19,3 @@ def KNNsearch(query, k, metric):
         elif(heapq.nsmallest(1,result)[0][0]<-dist):
             heapq.heapreplace(result,(-dist,Collection["names"][i]))
     return [heapq.heappop(result) for i in range(len(result))]
-
-
-#path_name = "Abdullah_Gul_0008.jpg"
-#metric = ["eucledian", "manhattan"]
-
-#imagePath = os.path.relpath(path_name)
-#print(imagePath)
-#query = getFeatures(imagePath)
-
-#ans = KNNsearch(query,20,metric[0])
-#for i in ans:
-#    print(i)

@@ -4,9 +4,7 @@
     <meta charset="UTF-8">
     <title>Queries visualizator</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
-
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <script src="static/queries.js"> </script>
@@ -14,7 +12,6 @@
         .serif {
             font-family: "Times New Roman", Times, serif;
         }
-
     </style>
 </head>
 <body onload="Parallax(),cargar()">
@@ -62,8 +59,7 @@
                                 <div class="col s2 "></div>
                                 <div class="col s4 white">
                                     <input placeholder="Inserte numero K " id="K" type="text" class="validate">
-                                </div>
-                                    
+                                </div>          
                             </div>
                             <div class="row">
                                 <div class="input-field col s12 white">
@@ -82,6 +78,7 @@
                             <tr>
                                 <th>IMAGE</th>
                                 <th>NAME</th>
+                                <th>Peso</th>
                             </tr>
                             </thead>
                             <tbody id = "KNN">
@@ -104,7 +101,7 @@
                         <form class="col s8 ">
                             <div class="row">
                                 <div class="col s3"></div>
-                                <div class="col s6 serif"><h4>KNN SEARCH</h2></div>
+                                <div class="col s6 serif"><h4>RTREE SEARCH</h2></div>
                             </div>
                             <div class="row">
                                 <div class="col s4"></div>
@@ -125,7 +122,6 @@
                         <table class="striped centered responsive-table">
                             <thead>
                             <tr>
-                                <th>ID</th>
                                 <th>IMAGE</th>
                                 <th>NAME</th>
                             </tr>

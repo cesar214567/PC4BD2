@@ -3,8 +3,6 @@ from flask import Flask,render_template, request, session, Response, redirect
 import json
 import time
 import os,sys
-os.popen('rm 128d_index.data 128d_index.index')
-
 from datetime import datetime
 from werkzeug.utils import secure_filename
 from Algoritmos.extractFeatures import getFeatures
@@ -37,17 +35,21 @@ def KNN(method,K):
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))   
-        #codigo de ariana
         data=getFeatures("imagenes/"+filename)
-        #print(data)
+        start=datetime.now()    #Medicion tiempo 
         ans = KNNsearch(data,int(K),method)
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))   
         response=[] 
+
         for i in ans:
             dictionary={}
-            dictionary['peso']=i[0]
+            dictionary['peso']=-i[0]
             dictionary['nombre']=i[1] 
             response.append(dictionary)
+
+        time =(datetime.now()-start)
+        print(time)
+        response = response[::-1]
         return Response(json.dumps(response),mimetype="application/json")
     return "FAILED"
 
@@ -63,10 +65,11 @@ def RTREE(K):
         for i in data: 
             list_carac.append(i)
             list_carac.append(i)
-
+        start=datetime.now()
         lres = list(rtree.nearest(coordinates=tuple(list_carac), num_results=int(K), objects = "raw"))
         os.remove(os.path.join(app.config['UPLOAD_FOLDER'], filename))    
-        #print(lres)   
+        time =(datetime.now()-start)
+        print(time)
         return Response(json.dumps(lres),mimetype="application/json")
     return "FAILED"
 
