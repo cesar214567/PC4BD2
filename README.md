@@ -124,6 +124,6 @@ Para pasar la información de frontend a backend se está utilizando json y jque
 ## Servidor: 
 
 Cada opción está llamando a una ruta diferente en el servidor: 
-- POST: /KNN/<method>/<K> llama a la función que hace la busqueda por KNN y utiliza K como parámetro para retornar lo K mas parecidos, el method determina si va a hacer manhattan o euclidiano. 
+- POST: /KNN/\<method\>/\<K\> llama a la función que hace la busqueda por KNN y utiliza K como parámetro para retornar lo K mas parecidos, el method determina si va a hacer manhattan o euclidiano. 
 
-- POST: /RTREE/<K>: llama a la función que va a insertar la imagen al R-Tree y recibe K como parámetro para retornar los K mas parecidos.
+- POST: /RTREE/\<K\>: llama a la función que va a insertar la imagen al R-Tree y recibe K como parámetro para retornar los K mas parecidos.
